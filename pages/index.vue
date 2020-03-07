@@ -3,7 +3,7 @@
     <div>
       <div class="p-4 bg-gray-200 text-right flex justify-between items-center">
         <h1 class="text-gray-700 text-xl font-bold">MoneyDo: Budget Planner</h1>
-        <span class="text-gray-700">{{ step }} / 9</span>
+        <span class="text-gray-700">{{ step }} / 10</span>
       </div>
       <div class="px-8 pt-6 pb-8">
         <div v-if="step === 1">
@@ -303,6 +303,54 @@
             <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
               Back
             </button>
+            <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Next
+            </button>
+          </div>
+        </div>
+        <div v-if="step === 10">
+          <h2 class="block text-gray-700 text-xl font-bold mb-2">
+            Your personal finance strategy
+          </h2>
+          <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Reduce you needs or raise an income</h3>
+            <p class="block sm:inline">Ensure your needs are lower than 50% of your income. Right now it's {{ needsPercent }}%.</p>
+          </div>
+          <div v-if="savingsPercent < 20" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Long-term goals and savings</h3>
+            <p class="block sm:inline">Try to save 20% of your income. Right now it's {{ savingsPercent }}%.</p>
+          </div>
+          <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Savings</h3>
+            <p class="block sm:inline">Put savings aside before spending. Transfer it to different bank account if possible.</p>
+          </div>
+          <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Envelopes</h3>
+            <p class="block sm:inline">Prepare 4 envelopes and put cash in it.</p>
+            <p class="block sm:inline">As alternative use <a class="underline" href="https://pocket-budget.netlify.com/" target="_blank">virtual envelopes</a>.</p>
+          </div>
+          <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Cash</h3>
+            <p class="block sm:inline">Use money from your envelopes. Avoid using credit cards for daily spendings.</p>
+          </div>
+          <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Age your money</h3>
+            <p class="block sm:inline">Calculate daily limits for each envelope and accumulate it daily. See a limit to grow. Don't spend over limit.</p>
+            <p><a class="underline" href="https://pocket-budget.netlify.com/" target="_blank">Virtual envelopes</a> calculate daily limits for you.</p>
+            <p class="block sm:inline">When you are spending money you earned last month, you will have nothing to stress about money-wise. The goal is to be spending money that is at least 30 days old. It might not happen overnight, but stick with it - it’s a game-changer!</p>
+          </div>
+          <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Over limit?</h3>
+            <p class="block sm:inline">If you had to pay over limits don't worry - wait few days to get back on track.</p>
+          </div>
+          <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+            <h3 class="font-bold block">Empty envelope?</h3>
+            <p class="block sm:inline">If you had to pay over amount of envelope don't worry - re-adjust budget.</p>
+          </div>
+          <div class="text-right">
+            <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Back
+            </button>
           </div>
         </div>
       </div>
@@ -548,6 +596,12 @@ export default {
     },
     balance () {
       return this.availableAmount - this.needsAmount - this.cultureAmount - this.extraAmount - this.wantsAmount;
+    },
+    needsPercent () {
+      return Math.round(this.needsAmount / this.incomeTotal) * 100;
+    },
+    savingsPercent () {
+      return Math.round(this.savingAmount / this.incomeTotal) * 100;
     }
   },
   methods: {
