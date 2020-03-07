@@ -145,7 +145,7 @@
                 <span class="block sm:inline">Round everything up to whole numbers to make calculations simpler.</span>
               </div>
               <div v-for="(income, index) in incomes" :key="index" class="flex mb-4">
-                <input @keyup="adjustArray(incomes, income, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Income name" v-model="income.name" autocomplete="off" />
+                <input @keyup="adjustArray(incomes, income, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Add another income" v-model="income.name" autocomplete="off" />
                 <input v-if="income.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="income.amount" />
               </div>
               <div class="flex mb-4 border-t-2 py-2">
@@ -172,7 +172,7 @@
               <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
             </div>
             <div v-for="(expense, index) in expenses" :key="index" class="flex mb-4">
-              <input @keyup="adjustArray(expenses, expense, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Expense name" v-model="expense.name" autocomplete="off" />
+              <input @keyup="adjustArray(expenses, expense, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Add another expense" v-model="expense.name" autocomplete="off" />
               <input v-if="expense.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="expense.amount" />
             </div>
             <div class="flex mb-4 border-t-2 py-2">
@@ -243,7 +243,7 @@
               <span class="w-1/3 text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ total(expenses) }}</span>
             </div>
             <div class="flex mb-4">
-              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" for="savingAmount">How much do you want to save this month?</label>
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" for="savingAmount">How much do you want to save this month? ({{ savingsPercent }}%)</label>
               <span class="py-2 px-4 text-red-700 leading-tight font-mono">-</span>
               <input class="w-1/3 text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" id="savingAmount" type="tel" placeholder="Amount" v-model="savingAmount" />
             </div>
@@ -337,13 +337,13 @@
             </div>
             <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
               <h3 class="font-bold block">Age your money</h3>
-              <p class="block sm:inline">Calculate daily limits for each envelope and accumulate it daily. See a limit to grow. Don't spend over limit.</p>
-              <p><a class="underline" href="https://pocket-budget.netlify.com/" target="_blank">Virtual envelopes</a> calculate daily limits for you.</p>
+              <p class="block sm:inline">Calculate daily limits for each envelope and accumulate it daily. Don't spend over the limit.</p>
+              <p><a class="underline" href="https://pocket-budget.netlify.com/" target="_blank">Virtual envelopes</a> calculate daily limits for yourself.</p>
               <p class="block sm:inline">When you are spending money you earned last month, you will have nothing to stress about money-wise. The goal is to be spending money that is at least 30 days old. It might not happen overnight, but stick with it - it’s a game-changer!</p>
             </div>
             <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Over limit?</h3>
-              <p class="block sm:inline">If you had to pay over limits don't worry - wait few days to get back on track.</p>
+              <h3 class="font-bold block">Over a limit?</h3>
+              <p class="block sm:inline">If you had to pay over a limit don't worry - wait few days to get back on track.</p>
             </div>
             <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
               <h3 class="font-bold block">Empty envelope?</h3>
@@ -405,7 +405,7 @@ export default {
         answer: false,
       },
       {
-        name: 'Finance strategy for a family',
+        name: 'Finance strategy for my family',
         answer: false,
       },
       {
@@ -457,7 +457,7 @@ export default {
         answer: null,
       },
       {
-        name: 'Do you rent your flat (Airbnb)?',
+        name: 'Do you rent out your flat?',
         answer: null,
       },
     ],
@@ -467,11 +467,11 @@ export default {
         answer: null
       },
       {
-        name: 'Do you use overdraft?',
+        name: 'Do you normally use overdraft?',
         answer: null
       },
       {
-        name: 'Do you have some money left on a salary day?',
+        name: 'Do you normally have some money left on a salary day?',
         answer: null
       },
     ],
@@ -491,10 +491,6 @@ export default {
       {
         name: "Loan",
         amount: "0"
-      },
-      {
-        name: "",
-        amount: ""
       }
     ],
     incomes: [
@@ -523,6 +519,11 @@ export default {
       {
         name: "Rent",
         amount: "500",
+        needs: true
+      },
+      {
+        name: "Insurance",
+        amount: "0",
         needs: true
       },
       {
@@ -611,6 +612,7 @@ export default {
       return Math.round(this.needsAmount / this.incomeTotal) * 100;
     },
     savingsPercent () {
+      console.log(this.savingAmount, this.incomeTotal, this.savingAmount / this.incomeTotal)
       return Math.round(this.savingAmount / this.incomeTotal) * 100;
     }
   },
