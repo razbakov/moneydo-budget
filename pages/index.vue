@@ -186,8 +186,8 @@
             <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(extraAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 border-t-2 py-2">
-            <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700">Balance</label>
-            <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ balance }}</span>
+            <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700" :class="{'text-red-700': balance < 0 }">Balance</label>
+            <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono" :class="{'text-red-700': balance < 0 }">{{ balance }}</span>
           </div>
           <div class="text-right">
             <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
