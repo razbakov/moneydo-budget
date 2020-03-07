@@ -168,22 +168,22 @@
           <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Needs</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="needsAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(needsAmount/30) }} per day</span>
+            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(needsAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Wants</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="wantsAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(wantsAmount/30) }} per day</span>
+            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(wantsAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Culture</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="cultureAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(cultureAmount/30) }} per day</span>
+            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(cultureAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Extra</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="extraAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(extraAmount/30) }} per day</span>
+            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(extraAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 border-t-2 py-2">
             <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700" :class="{'text-red-700': balance < 0 }">Balance</label>
