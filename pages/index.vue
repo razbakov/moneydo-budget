@@ -609,11 +609,10 @@ export default {
       return this.availableAmount - this.needsAmount - this.cultureAmount - this.extraAmount - this.wantsAmount;
     },
     needsPercent () {
-      return Math.round(this.needsAmount / this.incomeTotal) * 100;
+      return this.needsAmount / this.incomeTotal * 100;
     },
     savingsPercent () {
-      console.log(this.savingAmount, this.incomeTotal, this.savingAmount / this.incomeTotal)
-      return Math.round(this.savingAmount / this.incomeTotal) * 100;
+      return this.savingAmount / this.incomeTotal * 100;
     }
   },
   methods: {
