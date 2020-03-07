@@ -2,8 +2,8 @@
   <div class="container md:mt-4 mx-auto max-w-screen-sm md:shadow-md rounded">
     <div>
       <div class="p-4 bg-gray-200 text-right flex justify-between items-center">
-        <h1 class="text-gray-700 text-xl font-bold">Personal Finance Strategy Wizard</h1>
-        <span class="text-gray-700">{{ step }} / 6</span>
+        <h1 class="text-gray-700 text-xl font-bold">MoneyDo: Budget Planner</h1>
+        <span class="text-gray-700">{{ step }} / 9</span>
       </div>
       <div class="px-8 pt-6 pb-8">
         <div v-if="step === 1">
@@ -12,8 +12,9 @@
               <div class="font-serif text-gray-700 leading-loose">
                 <p>Hello Master,</p>
                 <p><br/></p>
-                <p>I am going to help you to plan your first budget.</p>
+                <p>I am going to help you to define your personal finance strategy and plan your first budget.</p>
                 <p>We are going to use Kakeibo and 50/30/20 methods.</p>
+                <p>Interactions are 100% secure and private. Your answers won't be recorded or transfered.</p>
               </div>
               <div>
                 <dl class="m-3">
@@ -37,7 +38,104 @@
         <div v-if="step === 2">
           <div>
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
-              Your net income (after tax)
+              Motivation
+            </h2>
+            <p class="mb-4 text-gray-500">Why do you need a personal finance strategy?</p>
+            <div v-for="(motivation, index) in motivations" :key="index" class="flex mb-4 items-center">
+              <input :id="`motivation-${index}`" type="checkbox" v-model="motivation.answer" />
+              <label :for="`motivation-${index}`" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ motivation.name }}</label>
+            </div>
+            <div class="text-right">
+              <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Back
+              </button>
+              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+        <div v-if="step === 3">
+          <div>
+            <h2 class="block text-gray-700 text-xl font-bold mb-2">
+              Questionnaire
+            </h2>
+            <p class="mb-4 text-gray-500">Answers to following questions will help us to set finance priorities.</p>
+            <h3 class="block text-gray-700 font-bold mb-2">Your actual situation</h3>
+            <div v-for="(context, index) in contexts" :key="`context-${index}`" class="flex mb-4 items-center">
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ context.name }}</label>
+              <div class="flex items-center">
+                <label>
+                  <span>Yes</span>
+                  <input type="radio" v-model="context.answer" :value="true" />
+                </label>
+                <label>
+                  <span>No</span>
+                  <input type="radio" v-model="context.answer" :value="false" />
+                </label>
+              </div>
+            </div>
+            <h3 class="block text-gray-700 font-bold mb-2">Your income</h3>
+            <div v-for="(context, index) in contextsIncome" :key="`context-income-${index}`" class="flex mb-4 items-center">
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ context.name }}</label>
+              <div class="flex items-center">
+                <label>
+                  <span>Yes</span>
+                  <input type="radio" v-model="context.answer" :value="true" />
+                </label>
+                <label>
+                  <span>No</span>
+                  <input type="radio" v-model="context.answer" :value="false" />
+                </label>
+              </div>
+            </div>
+            <h3 class="block text-gray-700 font-bold mb-2">Your expenses</h3>
+            <div v-for="(context, index) in contextsExpense" :key="`context-expense-${index}`" class="flex mb-4 items-center">
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ context.name }}</label>
+              <div class="flex items-center">
+                <label>
+                  <span>Yes</span>
+                  <input type="radio" v-model="context.answer" :value="true" />
+                </label>
+                <label>
+                  <span>No</span>
+                  <input type="radio" v-model="context.answer" :value="false" />
+                </label>
+              </div>
+            </div>
+            <div class="text-right">
+              <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Back
+              </button>
+              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+        <div v-if="step === 4">
+          <div>
+            <h2 class="block text-gray-700 text-xl font-bold mb-2">
+              Your actual situation
+            </h2>
+            <div v-for="(amount, index) in amounts" :key="index" class="flex mb-4">
+              <input @keyup="adjustArray(amounts, amount, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Amount name" v-model="amount.name" autocomplete="off" />
+              <input v-if="amount.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="amount.amount" />
+            </div>
+            <div class="text-right">
+              <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Back
+              </button>
+              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+        <div v-if="step === 5">
+          <div>
+            <h2 class="block text-gray-700 text-xl font-bold mb-2">
+              Monthly net income (after tax)
             </h2>
             <p class="mb-4 text-gray-500">If your income is not consistent each month, make an educated guess.</p>
             <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
@@ -62,11 +160,11 @@
             </div>
           </div>
         </div>
-        <div v-if="step === 3">
+        <div v-if="step === 6">
           <h2 class="block text-gray-700 text-xl font-bold mb-2">
             Your regular outgoings
           </h2>
-          <p class="mb-4 text-gray-500">List your regular outgoings here. That's anything that recurs each month, such as rent, mortgage, utility bills, season tickets, credit card payments, phone, parking permit, gym membership, home, car, health, insurance, loans, etc.</p>
+          <p class="mb-4 text-gray-500">List your regular expenses here. That's anything that recurs each month, such as rent, mortgage, utility bills, season tickets, credit card payments, phone, parking permit, gym membership, home, car, health, insurance, loans, etc.</p>
           <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Tip:</strong>
             <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
@@ -88,7 +186,7 @@
             </button>
           </div>
         </div>
-        <div v-if="step === 4">
+        <div v-if="step === 7">
           <h2 class="block text-gray-700 text-xl font-bold mb-2">
             Absolute needs
           </h2>
@@ -98,8 +196,8 @@
             <span class="block sm:inline">If it is from needs category, but premium and more costly then it comes to wants.</span>
           </div>
           <div v-for="(expense, index) in filled(expenses)" :key="index" class="flex mb-4 items-center">
-            <input type="checkbox" v-model="expense.needs" />
-            <span class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ expense.name }}</span>
+            <input :id="`expense-${index}`" type="checkbox" v-model="expense.needs" />
+            <label :for="`expense-${index}`" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ expense.name }}</label>
             <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ expense.amount }}</span>
           </div>
           <div class="flex mb-4 border-t-2 py-2">
@@ -119,7 +217,7 @@
             </button>
           </div>
         </div>
-        <div v-if="step === 5">
+        <div v-if="step === 8">
           <h2 class="block text-gray-700 text-xl font-bold mb-2">
             Savings target
           </h2>
@@ -156,7 +254,7 @@
             </button>
           </div>
         </div>
-        <div v-if="step === 6">
+        <div v-if="step === 9">
           <h2 class="block text-gray-700 text-xl font-bold mb-2">
             Envelopes
           </h2>
@@ -222,6 +320,120 @@ export default {
     wantsAmount: 0,
     cultureAmount: 0,
     extraAmount: 0,
+    motivations: [
+      {
+        name: 'Pay down on dept',
+        answer: false,
+      },
+      {
+        name: 'Start own business',
+        answer: false,
+      },
+      {
+        name: 'Buy a new gadget',
+        answer: false,
+      },
+      {
+        name: 'Buy a house',
+        answer: false,
+      },
+      {
+        name: 'Travel the world',
+        answer: false,
+      },
+      {
+        name: 'Have savings',
+        answer: false,
+      },
+      {
+        name: 'Finance strategy for a family',
+        answer: false,
+      },
+      {
+        name: 'Start investing',
+        answer: false,
+      }
+    ],
+    contexts: [
+      {
+        name: 'Do you have some savings?',
+        answer: null
+      },
+      {
+        name: 'Do you have investments?',
+        answer: null
+      },
+      {
+        name: 'Are you married?',
+        answer: null
+      },
+      {
+        name: 'Do you have kids or planning to have soon?',
+        answer: null
+      },
+    ],
+    contextsIncome: [
+      {
+        name: 'Do you own a business?',
+        answer: null,
+      },
+      {
+        name: 'Are you an employee?',
+        answer: null,
+      },
+      {
+        name: 'Do you have a life insurance?',
+        answer: null,
+      },
+      {
+        name: 'Do you do freelance jobs?',
+        answer: null,
+      },
+      {
+        name: 'Do you get any help from goverment (jobless benefits, pension, etc.)? ',
+        answer: null,
+      },
+      {
+        name: 'Do you rent your flat (Airbnb)?',
+        answer: null,
+      },
+    ],
+    contextsExpense: [
+      {
+        name: 'Do you have to pay a credit?',
+        answer: null
+      },
+      {
+        name: 'Do you use overdraft?',
+        answer: null
+      },
+      {
+        name: 'Do you have some money left on a salary day?',
+        answer: null
+      },
+    ],
+    amounts: [
+      {
+        name: "Savings",
+        amount: "0"
+      },
+      {
+        name: "Credit",
+        amount: "0"
+      },
+      {
+        name: "Overdraft",
+        amount: "0"
+      },
+      {
+        name: "Loan",
+        amount: "0"
+      },
+      {
+        name: "",
+        amount: ""
+      }
+    ],
     incomes: [
       {
         name: "Salary",
