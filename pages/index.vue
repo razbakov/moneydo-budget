@@ -427,11 +427,11 @@ export default {
         answer: null
       },
       {
-        name: 'Are you married?',
+        name: 'Are you married or in a serious relationship?',
         answer: null
       },
       {
-        name: 'Do you have kids or planning to have soon?',
+        name: 'Do you have kids or planning to have soon (in your household)?',
         answer: null
       },
     ],
