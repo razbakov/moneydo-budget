@@ -2,7 +2,7 @@
   <div class="container md:mt-4 mx-auto max-w-screen-sm md:shadow-md rounded">
     <div>
       <div class="p-4 bg-gray-200 text-right flex justify-between items-center">
-        <h1 class="text-gray-700 text-xl font-bold">Planning your first budget</h1>
+        <h1 class="text-gray-700 text-xl font-bold">Personal Finance Strategy Wizard</h1>
         <span class="text-gray-700">{{ step }} / 6</span>
       </div>
       <div class="px-8 pt-6 pb-8">
@@ -90,7 +90,7 @@
         </div>
         <div v-if="step === 4">
           <h2 class="block text-gray-700 text-xl font-bold mb-2">
-            Needs or Wants?
+            Absolute needs
           </h2>
           <p class="mb-4 text-gray-500">Uncheck which of those regular expenses are not absolute must for your survival.</p>
           <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
@@ -126,7 +126,7 @@
           <p class="mb-4 text-gray-500">Work out how much you have to spend this month and decide what you want to save.</p>
           <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Tip:</strong>
-            <span class="block sm:inline">Method 50/30/20 recommends to save 20% of income. I calculated this value for you.</span>
+            <span class="block sm:inline">Save 20% of income.</span>
           </div>
           <div class="flex mb-4">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total projected income</label>
@@ -163,27 +163,35 @@
           <p class="mb-4 text-gray-500">Let's plan your daily spending limits.</p>
           <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Tip:</strong>
-            <span class="block sm:inline">Method 50/30/20 recommends to allocate 50% for needs and 30% for wants. I calculated those values for you.</span>
+            <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
           </div>
           <div class="flex mb-4 items-center">
-            <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Needs</label>
+            <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+              <dt class="font-bold text-gray-700">Needs</dt>
+              <dd class="text-gray-500">Things you can’t live without, like food, toilet paper and shampoo.</dd>
+            </dl>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="needsAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(needsAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 items-center">
-            <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Wants</label>
+            <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+              <dt class="font-bold text-gray-700">Wants</dt>
+              <dd class="text-gray-500">Purchases you enjoy but don’t need, like a takeout meal or pair of new shoes.</dd>
+            </dl>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="wantsAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(wantsAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 items-center">
-            <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Culture</label>
+            <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+              <dt class="font-bold text-gray-700">Culture</dt>
+              <dd class="text-gray-500">Things like movies, books, museum visits and education.</dd>
+            </dl>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="cultureAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(cultureAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 items-center">
-            <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Extra</label>
+            <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+              <dt class="font-bold text-gray-700">Extra</dt>
+              <dd class="text-gray-500">Expenses you aren't going to anticipate, like a doctor’s visit, car repair or unplanned presents.</dd>
+            </dl>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="extraAmount" />
-            <span class="text-right ml-2 text-gray-700 leading-tight w-56">~ {{ Math.round(extraAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 border-t-2 py-2">
             <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700" :class="{'text-red-700': balance < 0 }">Balance</label>
@@ -217,19 +225,19 @@ export default {
     incomes: [
       {
         name: "Salary",
-        amount: ""
+        amount: "2000"
       },
       {
         name: "Freelance",
-        amount: ""
+        amount: "0"
       },
       {
         name: "Benefits",
-        amount: ""
+        amount: "0"
       },
       {
         name: "Airbnb",
-        amount: ""
+        amount: "0"
       },
       {
         name: "",
@@ -239,42 +247,47 @@ export default {
     expenses: [
       {
         name: "Rent",
-        amount: "",
+        amount: "500",
+        needs: true
+      },
+      {
+        name: "Loan",
+        amount: "0",
         needs: true
       },
       {
         name: "Electricity",
-        amount: "",
+        amount: "0",
         needs: true
       },
       {
         name: "Internet",
-        amount: "",
+        amount: "0",
         needs: true
       },
       {
         name: "Phone",
-        amount: "",
+        amount: "0",
         needs: true
       },
       {
         name: "Transport",
-        amount: "",
+        amount: "0",
         needs: true
       },
       {
         name: "Gym",
-        amount: "",
+        amount: "0",
         needs: false
       },
       {
         name: "Netflix",
-        amount: "",
+        amount: "0",
         needs: false
       },
       {
         name: "Amazon Prime",
-        amount: "",
+        amount: "0",
         needs: false
       },
       {
@@ -336,7 +349,7 @@ export default {
       return filteredItems.reduce(reducer, 0);
     },
     filled (items) {
-      return items.filter(item => item.amount);
+      return items.filter(item => item.amount > 0);
     },
     adjustArray(items, item, index) {
       if (item.name && index === items.length - 1) {
