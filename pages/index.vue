@@ -226,6 +226,10 @@
             <strong class="font-bold">Tip:</strong>
             <span class="block sm:inline">Save 20% of income.</span>
           </div>
+          <div v-if="goals.salary.enabled" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold block">Goal "Save 3 salaries" - {{ goals.salary.percent }}%</strong>
+            <span class="block sm:inline">You saved {{ goals.salary.amount }} of {{ goals.salary.goal }}. With {{ savingAmount }} a month you will reach this goal in {{ monthsToGoal(goals.salary, savingAmount) }} months.</span>
+          </div>
           <div class="flex mb-4">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total projected income</label>
             <span class="py-2 px-4 text-green-700 leading-tight font-mono">+</span>
@@ -320,6 +324,7 @@ export default {
     wantsAmount: 0,
     cultureAmount: 0,
     extraAmount: 0,
+    goals: {},
     motivations: [
       {
         name: 'Pay down on dept',
@@ -523,11 +528,17 @@ export default {
     },
     expenseTotal() {
       this.calculate();
+    },
+    amountTotal() {
+      this.calculate();
     }
   },
   computed: {
     incomeTotal () {
       return this.total(this.incomes);
+    },
+    amountTotal () {
+      return this.total(this.amounts);
     },
     expenseTotal () {
       return this.total(this.expenses);
@@ -546,7 +557,26 @@ export default {
       const wantsAmount = this.incomeTotal * 0.3 - this.total(this.expenses, {needs: false});
       this.cultureAmount = wantsAmount * 0.1;
       this.extraAmount = wantsAmount * 0.1;
-      this.wantsAmount = wantsAmount - parseInt(this.cultureAmount) -  parseInt(this.extraAmount)
+      this.wantsAmount = wantsAmount - parseInt(this.cultureAmount) -  parseInt(this.extraAmount);
+
+      const goal = this.get('incomes', 'Salary') * 3
+      const amount = this.get('amounts', 'Savings');
+      const percent = Math.round(amount / goal) * 100;
+
+      this.goals = {
+        salary: {
+          amount,
+          goal,
+          percent,
+          enabled: percent < 100
+        }
+      }
+    },
+    monthsToGoal(goal, savingAmount) {
+      return Math.round((goal.goal - goal.amount) / savingAmount);
+    },
+    get(items, name) {
+      return parseInt(this[items].find(item => item.name === name).amount);
     },
     total (items, filter) {
       let filteredItems = items
