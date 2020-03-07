@@ -192,57 +192,10 @@ export default {
     wantsAmount: 0,
     cultureAmount: 0,
     extraAmount: 0,
-    expenses: [
-      {
-        name: "Rent",
-        amount: "955",
-        needs: true
-      },
-      {
-        name: "Electricity",
-        amount: "65",
-        needs: true
-      },
-      {
-        name: "Internet",
-        amount: "20",
-        needs: true
-      },
-      {
-        name: "Phone",
-        amount: "35",
-        needs: true
-      },
-      {
-        name: "Transport",
-        amount: "55",
-        needs: true
-      },
-      {
-        name: "Gym",
-        amount: "20",
-        needs: false
-      },
-      {
-        name: "Netflix",
-        amount: "15",
-        needs: false
-      },
-      {
-        name: "Amazon Prime",
-        amount: "15",
-        needs: false
-      },
-      {
-        name: "",
-        amount: "",
-        needs: true
-      }
-    ],
     incomes: [
       {
         name: "Salary",
-        amount: "3000"
+        amount: ""
       },
       {
         name: "Freelance",
@@ -261,23 +214,53 @@ export default {
         amount: ""
       }
     ],
-    envelopes: [
+    expenses: [
       {
-        name: "Needs",
-        planned: 500,
-        percent: 0.5
+        name: "Rent",
+        amount: "",
+        needs: true
       },
       {
-        name: "Wants",
-        planned: 300,
-        percent: 0.3
+        name: "Electricity",
+        amount: "",
+        needs: true
       },
       {
-        name: "Goals",
-        planned: 200,
-        percent: 0.2
+        name: "Internet",
+        amount: "",
+        needs: true
       },
-    ]
+      {
+        name: "Phone",
+        amount: "",
+        needs: true
+      },
+      {
+        name: "Transport",
+        amount: "",
+        needs: true
+      },
+      {
+        name: "Gym",
+        amount: "",
+        needs: false
+      },
+      {
+        name: "Netflix",
+        amount: "",
+        needs: false
+      },
+      {
+        name: "Amazon Prime",
+        amount: "",
+        needs: false
+      },
+      {
+        name: "",
+        amount: "",
+        needs: true
+      }
+    ],
   }),
   metaInfo() {
     return {
