@@ -3,6 +3,7 @@
     <div>
       <div class="p-4 bg-gray-200 text-right flex justify-between items-center">
         <h1 class="text-gray-700 text-xl font-bold">Planning your first budget</h1>
+        <span class="text-gray-700">{{ step }} / 6</span>
       </div>
       <div class="px-8 pt-6 pb-8">
         <div v-if="step === 1">
@@ -52,6 +53,9 @@
               <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ total(incomes) }}</span>
             </div>
             <div class="text-right">
+              <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Back
+              </button>
               <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
@@ -76,6 +80,9 @@
             <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ total(expenses) }}</span>
           </div>
           <div class="text-right">
+            <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Back
+            </button>
             <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Next
             </button>
@@ -104,6 +111,9 @@
             <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ total(expenses, {needs: false}) }}</span>
           </div>
           <div class="text-right">
+            <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Back
+            </button>
             <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Next
             </button>
@@ -138,6 +148,9 @@
             <span class="w-1/3 text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ availableAmount }}</span>
           </div>
           <div class="text-right">
+            <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Back
+            </button>
             <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Next
             </button>
@@ -152,25 +165,34 @@
             <strong class="font-bold">Tip:</strong>
             <span class="block sm:inline">Method 50/30/20 recommends to allocate 50% for needs and 30% for wants. I calculated those values for you.</span>
           </div>
-          <div class="flex mb-4">
+          <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Needs</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="needsAmount" />
+            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(needsAmount/30) }} per day</span>
           </div>
-          <div class="flex mb-4">
+          <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Wants</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="wantsAmount" />
+            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(wantsAmount/30) }} per day</span>
           </div>
-          <div class="flex mb-4">
+          <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Culture</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="cultureAmount" />
+            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(cultureAmount/30) }} per day</span>
           </div>
-          <div class="flex mb-4">
+          <div class="flex mb-4 items-center">
             <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Extra</label>
             <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="extraAmount" />
+            <span class="text-right ml-2 text-gray-700 leading-tight w-1/4">~ {{ Math.round(extraAmount/30) }} per day</span>
           </div>
           <div class="flex mb-4 border-t-2 py-2">
             <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700">Balance</label>
             <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono">{{ balance }}</span>
+          </div>
+          <div class="text-right">
+            <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Back
+            </button>
           </div>
         </div>
       </div>
@@ -273,11 +295,17 @@ export default {
   watch: {
     incomeTotal() {
       this.calculate();
+    },
+    expenseTotal() {
+      this.calculate();
     }
   },
   computed: {
     incomeTotal () {
       return this.total(this.incomes);
+    },
+    expenseTotal () {
+      return this.total(this.expenses);
     },
     availableAmount () {
       return this.total(this.incomes) - this.total(this.expenses) - this.savingAmount;
