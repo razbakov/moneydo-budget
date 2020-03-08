@@ -140,10 +140,6 @@
                 Monthly net income (after tax)
               </h2>
               <p class="mb-4 text-gray-500">If your income is not consistent each month, make an educated guess.</p>
-              <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">Tip:</strong>
-                <span class="block sm:inline">Round everything up to whole numbers to make calculations simpler.</span>
-              </div>
               <div v-for="(income, index) in incomes" :key="index" class="flex mb-4">
                 <input @keyup="adjustArray(incomes, income, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Add another income" v-model="income.name" autocomplete="off" />
                 <input v-if="income.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="income.amount" />
@@ -160,17 +156,17 @@
                   Next
                 </button>
               </div>
+              <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Tip:</strong>
+                <span class="block sm:inline">Round everything up to whole numbers to make calculations simpler.</span>
+              </div>
             </div>
           </div>
           <div v-if="step === 6">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
-              Your regular outgoings
+              Regular expenses
             </h2>
             <p class="mb-4 text-gray-500">List your regular expenses here. That's anything that recurs each month, such as rent, mortgage, utility bills, season tickets, credit card payments, phone, parking permit, gym membership, home, car, health, insurance, loans, etc.</p>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
-            </div>
             <div v-for="(expense, index) in expenses" :key="index" class="flex mb-4">
               <input @keyup="adjustArray(expenses, expense, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Add another expense" v-model="expense.name" autocomplete="off" />
               <input v-if="expense.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="expense.amount" />
@@ -187,16 +183,16 @@
                 Next
               </button>
             </div>
+            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+              <strong class="font-bold">Tip:</strong>
+              <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
+            </div>
           </div>
           <div v-if="step === 7">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
-              Absolute needs
+              Needs
             </h2>
-            <p class="mb-4 text-gray-500">Uncheck which of those regular expenses are not absolute must for your survival.</p>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">If it is from needs category, but premium and more costly then it comes to wants.</span>
-            </div>
+            <p class="mb-4 text-gray-500">Check expenses that are absolute must for your survival.</p>
             <div v-for="(expense, index) in filled(expenses)" :key="index" class="flex mb-4 items-center">
               <input :id="`expense-${index}`" type="checkbox" v-model="expense.needs" />
               <label :for="`expense-${index}`" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">{{ expense.name }}</label>
@@ -217,6 +213,10 @@
               <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
+            </div>
+            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+              <strong class="font-bold">Tip:</strong>
+              <span class="block sm:inline">If it is from needs category, but premium and more costly then it comes to wants.</span>
             </div>
           </div>
           <div v-if="step === 8">
@@ -277,10 +277,6 @@
               Envelopes
             </h2>
             <p class="mb-4 text-gray-500">Let's plan your daily spending limits.</p>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
-            </div>
             <div class="flex mb-4 items-center">
               <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
                 <dt class="font-bold text-gray-700">Needs</dt>
@@ -320,6 +316,10 @@
               <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
+            </div>
+            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+              <strong class="font-bold">Tip:</strong>
+              <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
             </div>
           </div>
           <div v-if="step === 10">
