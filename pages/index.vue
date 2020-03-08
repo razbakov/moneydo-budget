@@ -40,6 +40,22 @@
           <div v-if="step === 2">
             <div>
               <h2 class="block text-gray-700 text-xl font-bold mb-2">
+                Do you need assistance?
+              </h2>
+              <p class="mb-4 text-gray-500">I prepared a questionnaire that will allow me to provide you with pre-fill incomes, expenses and goals.</p>
+              <div class="text-right">
+                <button @click="step = 5" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                  No, let me start blank
+                </button>
+                <button @click="step = 3" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                  Yes, I need template
+                </button>
+              </div>
+            </div>
+          </div>
+          <div v-if="step === 3">
+            <div>
+              <h2 class="block text-gray-700 text-xl font-bold mb-2">
                 Motivation
               </h2>
               <p class="mb-4 text-gray-500">Why do you need a personal finance strategy?</p>
@@ -57,7 +73,7 @@
               </div>
             </div>
           </div>
-          <div v-if="step === 3">
+          <div v-if="step === 4">
             <div>
               <h2 class="block text-gray-700 text-xl font-bold mb-2">
                 Questionnaire
@@ -115,7 +131,7 @@
               </div>
             </div>
           </div>
-          <div v-if="step === 4">
+          <div v-if="step === 5">
             <div>
               <h2 class="block text-gray-700 text-xl font-bold mb-2">
                 Your actual situation
@@ -134,7 +150,7 @@
               </div>
             </div>
           </div>
-          <div v-if="step === 5">
+          <div v-if="step === 6">
             <div>
               <h2 class="block text-gray-700 text-xl font-bold mb-2">
                 Monthly net income (after tax)
@@ -162,7 +178,7 @@
               </div>
             </div>
           </div>
-          <div v-if="step === 6">
+          <div v-if="step === 7">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Regular expenses
             </h2>
@@ -188,7 +204,7 @@
               <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
             </div>
           </div>
-          <div v-if="step === 7">
+          <div v-if="step === 8">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Needs
             </h2>
@@ -219,7 +235,7 @@
               <span class="block sm:inline">If it is from needs category, but premium and more costly then it comes to wants.</span>
             </div>
           </div>
-          <div v-if="step === 8">
+          <div v-if="step === 9">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Savings target
             </h2>
@@ -272,7 +288,7 @@
               <span class="block sm:inline">Save 20% of income.</span>
             </div>
           </div>
-          <div v-if="step === 9">
+          <div v-if="step === 10">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Budget
             </h2>
@@ -360,7 +376,7 @@
               <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
             </div>
           </div>
-          <div v-if="step === 10">
+          <div v-if="step === 11">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Your personal finance strategy
             </h2>
@@ -416,7 +432,6 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/default.css'
 
 export default {
   components: {
