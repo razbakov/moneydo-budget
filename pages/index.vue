@@ -281,8 +281,12 @@
               <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total income</label>
               <span class="text-right py-2 px-4 text-green-700 leading-tight font-mono">{{ total(incomes) }}</span>
             </div>
+            <div class="flex mb-4 pr-1">
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Savings ({{ savingsPercent }}% of income)</label>
+              <span class="text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ savingAmount }}</span>
+            </div>
             <div class="bg-gray-100 pr-1">
-              <h2 class="mb-4 w-full p-2 mr-4 font-bold text-gray-700">Needs ({{ needsPercent }}%)</h2>
+              <h2 class="mb-4 w-full p-2 mr-4 font-bold text-gray-700">Needs ({{ needsPercent }}% of income)</h2>
               <div class="pl-4">
                 <div class="flex mb-4">
                   <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Regular needs</label>
@@ -310,7 +314,7 @@
               </vue-slider>
             </div>
             <div class="bg-gray-100 pr-1">
-              <h2 class="mb-4 w-full p-2 mr-4 font-bold text-gray-700">Wants ({{ wantsPercent }}%)</h2>
+              <h2 class="mb-4 w-full p-2 mr-4 font-bold text-gray-700">Wants ({{ wantsPercent }}% of income)</h2>
               <div class="pl-4">
                 <div class="flex mb-4">
                   <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Regular wants</label>
@@ -338,10 +342,6 @@
                   <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="dailyWantsAmount" />
                 </div>
               </div>
-            </div>
-            <div class="flex mb-4 pr-1">
-              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Savings ({{ savingsPercent }}%)</label>
-              <span class="text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ savingAmount }}</span>
             </div>
             <div class="flex mb-4 border-t-2 py-2 pr-1">
               <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700" :class="{'text-red-700': balance < 0 }">Balance</label>
