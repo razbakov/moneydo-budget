@@ -122,7 +122,7 @@
               </h2>
               <div v-for="(amount, index) in amounts" :key="index" class="flex mb-4">
                 <input @keyup="adjustArray(amounts, amount, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Amount name" v-model="amount.name" autocomplete="off" />
-                <input v-if="amount.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="amount.amount" />
+                <input v-if="amount.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="amount.amount" />
               </div>
               <div class="text-right">
                 <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
@@ -142,7 +142,7 @@
               <p class="mb-4 text-gray-500">If your income is not consistent each month, make an educated guess.</p>
               <div v-for="(income, index) in incomes" :key="index" class="flex mb-4">
                 <input @keyup="adjustArray(incomes, income, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Add another income" v-model="income.name" autocomplete="off" />
-                <input v-if="income.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="income.amount" />
+                <input v-if="income.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="income.amount" />
               </div>
               <div class="flex mb-4 border-t-2 py-2">
                 <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700">Income total</label>
@@ -169,7 +169,7 @@
             <p class="mb-4 text-gray-500">List your regular expenses here. That's anything that recurs each month, such as rent, mortgage, utility bills, season tickets, credit card payments, phone, parking permit, gym membership, home, car, health, insurance, loans, etc.</p>
             <div v-for="(expense, index) in expenses" :key="index" class="flex mb-4">
               <input @keyup="adjustArray(expenses, expense, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Add another expense" v-model="expense.name" autocomplete="off" />
-              <input v-if="expense.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="expense.amount" />
+              <input v-if="expense.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="expense.amount" />
             </div>
             <div class="flex mb-4 border-t-2 py-2">
               <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700">Expense total</label>
@@ -241,7 +241,7 @@
             <div class="flex mb-4">
               <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" for="savingAmount">Savings ({{ savingsPercent }}%)</label>
               <span class="py-2 px-4 text-red-700 leading-tight font-mono">-</span>
-              <input class="w-1/3 text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" id="savingAmount" type="tel" placeholder="Amount" v-model="savingAmount" />
+              <input class="w-1/3 text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" id="savingAmount" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="savingAmount" />
             </div>
             <div class="mt-16 mb-4">
               <vue-slider
@@ -297,7 +297,7 @@
                     <dt class="font-bold text-gray-700">Daily needs</dt>
                     <dd class="text-gray-500">Things you can’t live without, like food, toilet paper and shampoo.</dd>
                   </dl>
-                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="dailyNeedsAmount" />
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="dailyNeedsAmount" />
                 </div>
               </div>
             </div>
@@ -325,21 +325,21 @@
                     <dt class="font-bold text-gray-700">Culture</dt>
                     <dd class="text-gray-500">Things like movies, books, museum visits and education.</dd>
                   </dl>
-                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="cultureAmount" />
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="cultureAmount" />
                 </div>
                 <div class="flex mb-4 items-center">
                   <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
                     <dt class="font-bold text-gray-700">Unexpected</dt>
                     <dd class="text-gray-500">Expenses you aren't going to anticipate, like a doctor’s visit, car repair or unplanned presents.</dd>
                   </dl>
-                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="extraAmount" />
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="extraAmount" />
                 </div>
                 <div class="flex mb-4 items-center">
                   <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
                     <dt class="font-bold text-gray-700">Daily wants</dt>
                     <dd class="text-gray-500">Purchases you enjoy but don’t need, like a takeout meal or pair of new shoes.</dd>
                   </dl>
-                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="dailyWantsAmount" />
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="dailyWantsAmount" />
                 </div>
               </div>
             </div>
