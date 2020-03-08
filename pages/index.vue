@@ -134,25 +134,6 @@
           <div v-if="step === 5">
             <div>
               <h2 class="block text-gray-700 text-xl font-bold mb-2">
-                Your actual situation
-              </h2>
-              <div v-for="(amount, index) in amounts" :key="index" class="flex mb-4">
-                <input @keyup="adjustArray(amounts, amount, index)" tabindex="-1" class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" type="text" placeholder="Amount name" v-model="amount.name" autocomplete="off" />
-                <input v-if="amount.name" class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" @focus="$event.target.select()" placeholder="Amount" v-model="amount.amount" />
-              </div>
-              <div class="text-right">
-                <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                  Back
-                </button>
-                <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  Next
-                </button>
-              </div>
-            </div>
-          </div>
-          <div v-if="step === 6">
-            <div>
-              <h2 class="block text-gray-700 text-xl font-bold mb-2">
                 Monthly net income (after tax)
               </h2>
               <p class="mb-4 text-gray-500">If your income is not consistent each month, make an educated guess.</p>
@@ -178,7 +159,7 @@
               </div>
             </div>
           </div>
-          <div v-if="step === 7">
+          <div v-if="step === 6">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Regular expenses
             </h2>
@@ -204,7 +185,7 @@
               <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
             </div>
           </div>
-          <div v-if="step === 8">
+          <div v-if="step === 7">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Needs
             </h2>
@@ -235,7 +216,7 @@
               <span class="block sm:inline">If it is from needs category, but premium and more costly then it comes to wants.</span>
             </div>
           </div>
-          <div v-if="step === 9">
+          <div v-if="step === 8">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Savings target
             </h2>
@@ -288,7 +269,7 @@
               <span class="block sm:inline">Save 20% of income.</span>
             </div>
           </div>
-          <div v-if="step === 10">
+          <div v-if="step === 9">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Budget
             </h2>
@@ -376,7 +357,7 @@
               <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
             </div>
           </div>
-          <div v-if="step === 11">
+          <div v-if="step === 10">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Your personal finance strategy
             </h2>
@@ -535,24 +516,6 @@ export default {
         answer: null
       },
     ],
-    amounts: [
-      {
-        name: "Savings",
-        amount: "0"
-      },
-      {
-        name: "Credit",
-        amount: "0"
-      },
-      {
-        name: "Overdraft",
-        amount: "0"
-      },
-      {
-        name: "Loan",
-        amount: "0"
-      }
-    ],
     incomes: [
       {
         name: "Salary",
@@ -648,17 +611,11 @@ export default {
     },
     expenseTotal() {
       this.calculate();
-    },
-    amountTotal() {
-      this.calculate();
     }
   },
   computed: {
     incomeTotal () {
       return this.total(this.incomes);
-    },
-    amountTotal () {
-      return this.total(this.amounts);
     },
     expenseTotal () {
       return this.total(this.expenses);
@@ -701,7 +658,7 @@ export default {
       this.dailyWantsAmount = this.wantsAmount - parseInt(this.cultureAmount) -  parseInt(this.extraAmount);
 
       const goal = this.get('incomes', 'Salary') * 3
-      const amount = this.get('amounts', 'Savings');
+      const amount = 0; //this.get('amounts', 'Savings');
       const percent = Math.round(amount / goal) * 100;
 
       this.goals = {
