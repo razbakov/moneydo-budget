@@ -457,31 +457,19 @@ export default {
         answer: false,
       },
       {
-        name: 'Start own business',
-        answer: false,
-      },
-      {
-        name: 'Buy a new gadget',
-        answer: false,
-      },
-      {
-        name: 'Buy a house',
-        answer: false,
-      },
-      {
-        name: 'Travel the world',
-        answer: false,
-      },
-      {
         name: 'Have savings',
         answer: false,
       },
       {
-        name: 'Finance strategy for my family',
+        name: 'Start own business',
         answer: false,
       },
       {
-        name: 'Start investing',
+        name: 'Buy something expensive (new gadget, car, house, etc.)',
+        answer: false,
+      },
+      {
+        name: 'Travel the world',
         answer: false,
       },
       {
