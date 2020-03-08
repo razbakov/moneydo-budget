@@ -4,7 +4,7 @@
       <div>
         <div class="p-4 bg-gray-200 text-right flex justify-between items-center">
           <h1 class="text-gray-700 text-xl font-bold">MoneyDo: Budget Planner</h1>
-          <span class="text-gray-700">{{ step }} / 10</span>
+          <span class="text-gray-700" v-if="step < 10">{{ step }} / 9</span>
         </div>
         <div class="px-8 pt-6 pb-8">
           <div v-if="step === 1">
@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="text-right">
-              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
             </div>
@@ -67,7 +67,7 @@
                 <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                   Back
                 </button>
-                <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Next
                 </button>
               </div>
@@ -125,7 +125,7 @@
                 <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                   Back
                 </button>
-                <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Next
                 </button>
               </div>
@@ -149,7 +149,7 @@
                 <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                   Back
                 </button>
-                <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Next
                 </button>
               </div>
@@ -176,7 +176,7 @@
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
-              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
             </div>
@@ -207,7 +207,7 @@
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
-              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
             </div>
@@ -221,6 +221,10 @@
               Savings target
             </h2>
             <p class="mb-4 text-gray-500">Decide what you want to save. Drag percent bar or input amount in Savings.</p>
+            <div v-if="savingsPercent < 20" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <h4 class="font-bold block">Long-term goals and savings</h4>
+              <p class="block sm:inline">Try to save 20% of your income. Right now it's {{ savingsPercent }}%.</p>
+            </div>
             <div v-if="goals.salary.enabled" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
               <strong class="font-bold block">Goal "Save 3 salaries" - {{ goals.salary.percent }}%</strong>
               <span class="block sm:inline">You saved {{ goals.salary.amount }} of {{ goals.salary.goal }}. With {{ savingAmount }} a month you will reach this goal in {{ monthsToGoal(goals.salary, savingAmount) }} months.</span>
@@ -260,7 +264,7 @@
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
-              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
             </div>
@@ -274,6 +278,14 @@
               Budget
             </h2>
             <p class="mb-4 text-gray-500">Let's plan your daily spending limits. Drag the slider to set needs percent.</p>
+            <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <h4 class="font-bold block">Reduce you needs or raise an income</h4>
+              <p class="block sm:inline">Ensure your needs are lower than 50% of your income. Right now it's {{ needsPercent }}%.</p>
+            </div>
+            <div v-if="balance != 0" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <h4 class="font-bold block">Adjust your budget</h4>
+              <p class="block sm:inline">Ensure balance is 0. Right now it is {{ balance }}.</p>
+            </div>
             <div class="flex mb-4 pr-1">
               <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total income</label>
               <span class="text-right py-2 px-4 text-green-700 leading-tight font-mono">{{ total(incomes) }}</span>
@@ -348,8 +360,8 @@
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
-              <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Next
+              <button @click="step += 1" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Finish
               </button>
             </div>
             <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
@@ -357,50 +369,88 @@
               <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
             </div>
           </div>
-          <div v-if="step === 10">
-            <h2 class="block text-gray-700 text-xl font-bold mb-2">
-              Your personal finance strategy
-            </h2>
+          <div v-if="step === 10" class="text-gray-700">
             <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Reduce you needs or raise an income</h3>
+              <button @click="step = 9" class="float-right ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Fix
+              </button>
+              <h4 class="font-bold block">Reduce you needs or raise an income</h4>
               <p class="block sm:inline">Ensure your needs are lower than 50% of your income. Right now it's {{ needsPercent }}%.</p>
             </div>
+            <div v-if="balance != 0" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <button @click="step = 9" class="float-right ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Fix
+              </button>
+              <h4 class="font-bold block">Adjust your budget</h4>
+              <p class="block sm:inline">Ensure balance is 0. Right now it is {{ balance }}.</p>
+            </div>
             <div v-if="savingsPercent < 20" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Long-term goals and savings</h3>
+              <button @click="step = 8" class="float-right ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Fix
+              </button>
+              <h4 class="font-bold block">Long-term goals and savings</h4>
               <p class="block sm:inline">Try to save 20% of your income. Right now it's {{ savingsPercent }}%.</p>
             </div>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Savings</h3>
-              <p class="block sm:inline">Put savings aside before spending. Transfer it to different bank account if possible.</p>
+            <div>
+              <h4 class="font-bold block">Step 1. Savings</h4>
+              <p class="block sm:inline">Put savings aside.</p>
+              <div class="p-4">
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Savings</dt>
+                    <dd class="text-gray-500">Transfer this amount to different bank account if possible and try to forget about this money.</dd>
+                  </dl>
+                  <span class="text-right py-2 px-4 leading-tight font-mono">{{ savingAmount }}</span>
+                </div>
+              </div>
             </div>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Envelopes</h3>
-              <p class="block sm:inline">Prepare 4 envelopes and put cash in it.</p>
-              <p class="block sm:inline">As alternative use <a class="underline" href="https://pocket-budget.netlify.com/" target="_blank">virtual envelopes</a>.</p>
+            <div>
+              <h4 class="font-bold block">Step 2. Daily spendings.</h4>
+              <p class="block sm:inline">Prepare 4 paper envelopes and put cash in it. For any payment use money from a corresponding envelope.</p>
+              <div class="p-4">
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Needs (~{{ Math.round(dailyNeedsAmount / 30) }} per day)</dt>
+                    <dd class="text-gray-500">Things you can’t live without, like food, toilet paper and shampoo.</dd>
+                  </dl>
+                  <span class="text-right py-2 px-4 leading-tight font-mono">{{ dailyNeedsAmount }}</span>
+                </div>
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Wants (~{{ Math.round(dailyWantsAmount / 30) }} per day)</dt>
+                    <dd class="text-gray-500">Purchases you enjoy but don’t need, like a takeout meal or pair of new shoes.</dd>
+                  </dl>
+                  <span class="text-right py-2 px-4 leading-tight font-mono">{{ dailyWantsAmount }}</span>
+                </div>
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Culture (~{{ Math.round(cultureAmount / 30) }} per day)</dt>
+                    <dd class="text-gray-500">Things like movies, books, museum visits and education.</dd>
+                  </dl>
+                  <span class="text-right py-2 px-4 leading-tight font-mono">{{ cultureAmount }}</span>
+                </div>
+                <div class="flex items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Unexpected (~{{ Math.round(extraAmount / 30) }} per day)</dt>
+                    <dd class="text-gray-500">Expenses you aren't going to anticipate, like a doctor’s visit, car repair or unplanned presents.</dd>
+                  </dl>
+                  <span class="text-right py-2 px-4 leading-tight font-mono">{{ extraAmount }}</span>
+                </div>
+              </div>
             </div>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Cash</h3>
-              <p class="block sm:inline">Use money from your envelopes. Avoid using credit cards for daily spendings.</p>
+            <div class="mb-4">
+              <h4 class="font-bold block">Step 3. Save first, spend later.</h4>
+              <p class="block sm:inline">Limit your daily spendings (see above). All you saved today you can spend tomorrow. Track daily limits with <strong class="font-bold">MoneyDo: Pocket Budget</strong>.</p>
             </div>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Age your money</h3>
-              <p class="block sm:inline">Calculate daily limits for each envelope and accumulate it daily. Don't spend over the limit.</p>
-              <p><a class="underline" href="https://pocket-budget.netlify.com/" target="_blank">Virtual envelopes</a> calculate daily limits for yourself.</p>
-              <p class="block sm:inline">When you are spending money you earned last month, you will have nothing to stress about money-wise. The goal is to be spending money that is at least 30 days old. It might not happen overnight, but stick with it - it’s a game-changer!</p>
-            </div>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Over a limit?</h3>
-              <p class="block sm:inline">If you had to pay over a limit don't worry - wait few days to get back on track.</p>
-            </div>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <h3 class="font-bold block">Empty envelope?</h3>
-              <p class="block sm:inline">If you had to pay over amount of envelope don't worry - re-adjust budget.</p>
-            </div>
-            <div class="text-right">
+            <div class="mt-8 flex justify-between">
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
+              <a href="https://pocket-budget.netlify.com/?utm_medium=referral&utm_source=planner&utm_campaign=daily-limits&utm_content=envelopes" target="_blank" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 relative rounded">
+                Start MoneyDo: Pocket Budget
+              </a>
             </div>
+            <!-- Better spend everything one day before salary than one day after. -->
           </div>
         </div>
       </div>
