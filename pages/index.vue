@@ -40,15 +40,15 @@
           <div v-if="step === 2">
             <div>
               <h2 class="block text-gray-700 text-xl font-bold mb-2">
-                Do you need assistance?
+                Wizard
               </h2>
-              <p class="mb-4 text-gray-500">I prepared a questionnaire that will allow me to provide you with pre-fill incomes, expenses and goals.</p>
-              <div class="text-right">
-                <button @click="step = 5" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                  No, let me start blank
+              <p class="mb-4 text-gray-700">I prepared a questionnaire that will allow me to recommend you list of incomes, expenses and goals. Would you like to give it a try?</p>
+              <div class="flex justify-center">
+                <button @click="step = 5" class="mr-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                  No
                 </button>
                 <button @click="step = 3" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                  Yes, I need template
+                  Yes
                 </button>
               </div>
             </div>
