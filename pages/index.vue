@@ -408,7 +408,7 @@
         </div>
       </div>
     </div>
-    <div class="container md:mt-4 mx-auto max-w-screen-sm text-sm text-gray-700 text-center mb-4">
+    <div class="container md:mt-4 mx-auto max-w-screen-sm text-sm text-gray-700 text-center mb-4 p-2">
       Interactions are 100% secure and private. Your answers won't be recorded or transfered.
     </div>
   </div>
