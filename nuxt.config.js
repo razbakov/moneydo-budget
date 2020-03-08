@@ -23,6 +23,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/vue-slider.css',
   ],
   /*
   ** Plugins to load before mounting the App
