@@ -223,29 +223,37 @@
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Savings target
             </h2>
-            <p class="mb-4 text-gray-500">Work out how much you have to spend this month and decide what you want to save.</p>
-            <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">Save 20% of income.</span>
-            </div>
+            <p class="mb-4 text-gray-500">Decide what you want to save. Drag percent bar or input amount in Savings.</p>
             <div v-if="goals.salary.enabled" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
               <strong class="font-bold block">Goal "Save 3 salaries" - {{ goals.salary.percent }}%</strong>
               <span class="block sm:inline">You saved {{ goals.salary.amount }} of {{ goals.salary.goal }}. With {{ savingAmount }} a month you will reach this goal in {{ monthsToGoal(goals.salary, savingAmount) }} months.</span>
             </div>
             <div class="flex mb-4">
-              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total projected income</label>
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total income</label>
               <span class="py-2 px-4 text-green-700 leading-tight font-mono">+</span>
               <span class="w-1/3 text-right py-2 px-4 text-green-700 leading-tight font-mono">{{ total(incomes) }}</span>
             </div>
             <div class="flex mb-4">
-              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Less regular expenses</label>
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Regular expenses</label>
               <span class="py-2 px-4 text-red-700 leading-tight font-mono">-</span>
               <span class="w-1/3 text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ total(expenses) }}</span>
             </div>
             <div class="flex mb-4">
-              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" for="savingAmount">How much do you want to save this month? ({{ savingsPercent }}%)</label>
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4" for="savingAmount">Savings ({{ savingsPercent }}%)</label>
               <span class="py-2 px-4 text-red-700 leading-tight font-mono">-</span>
               <input class="w-1/3 text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" id="savingAmount" type="tel" placeholder="Amount" v-model="savingAmount" />
+            </div>
+            <div class="mt-16 mb-4">
+              <vue-slider
+                v-model="savingsPercent"
+                tooltip="always"
+                :min="1"
+                :max="100"
+              >
+                <template v-slot:tooltip="{ value }">
+                  <div class="p-1 rounded text-sm text-white bg-blue-500">{{ value }}%</div>
+                </template>
+              </vue-slider>
             </div>
             <div class="flex mb-4 border-t-2 py-2">
               <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700">What's left for you to spend?</label>
@@ -258,6 +266,10 @@
               <button @click="step += 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Next
               </button>
+            </div>
+            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+              <strong class="font-bold">Tip:</strong>
+              <span class="block sm:inline">Save 20% of income.</span>
             </div>
           </div>
           <div v-if="step === 9">
@@ -365,7 +377,13 @@
 </template>
 
 <script>
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
+
 export default {
+  components: {
+    VueSlider
+  },
   data: () => ({
     name: "March",
     income: 1000,
@@ -580,6 +598,7 @@ export default {
   },
   mounted() {
     this.calculate();
+    this.step = this.$route.query.step ? parseInt(this.$route.query.step) : 1;
   },
   watch: {
     incomeTotal() {
@@ -611,8 +630,13 @@ export default {
     needsPercent () {
       return this.needsAmount / this.incomeTotal * 100;
     },
-    savingsPercent () {
-      return this.savingAmount / this.incomeTotal * 100;
+    savingsPercent: {
+      get () {
+        return Math.round(this.savingAmount / this.incomeTotal * 100);
+      },
+      set (val) {
+        this.savingAmount = Math.round((val / 100) * this.incomeTotal);
+      }
     }
   },
   methods: {
