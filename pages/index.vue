@@ -274,38 +274,76 @@
           </div>
           <div v-if="step === 9">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
-              Envelopes
+              Budget
             </h2>
-            <p class="mb-4 text-gray-500">Let's plan your daily spending limits.</p>
-            <div class="flex mb-4 items-center">
-              <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
-                <dt class="font-bold text-gray-700">Needs</dt>
-                <dd class="text-gray-500">Things you can’t live without, like food, toilet paper and shampoo.</dd>
-              </dl>
-              <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="needsAmount" />
+            <p class="mb-4 text-gray-500">Let's plan your daily spending limits. Drag the slider to set needs percent.</p>
+            <div class="flex mb-4 pr-1">
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total income</label>
+              <span class="text-right py-2 px-4 text-green-700 leading-tight font-mono">{{ total(incomes) }}</span>
             </div>
-            <div class="flex mb-4 items-center">
-              <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
-                <dt class="font-bold text-gray-700">Wants</dt>
-                <dd class="text-gray-500">Purchases you enjoy but don’t need, like a takeout meal or pair of new shoes.</dd>
-              </dl>
-              <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="wantsAmount" />
+            <div class="bg-gray-100 pr-1">
+              <h2 class="mb-4 w-full p-2 mr-4 font-bold text-gray-700">Needs ({{ needsPercent }}%)</h2>
+              <div class="pl-4">
+                <div class="flex mb-4">
+                  <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Regular needs</label>
+                  <span class="text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ total(expenses, {needs: true}) }}</span>
+                </div>
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Daily needs</dt>
+                    <dd class="text-gray-500">Things you can’t live without, like food, toilet paper and shampoo.</dd>
+                  </dl>
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="dailyNeedsAmount" />
+                </div>
+              </div>
             </div>
-            <div class="flex mb-4 items-center">
-              <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
-                <dt class="font-bold text-gray-700">Culture</dt>
-                <dd class="text-gray-500">Things like movies, books, museum visits and education.</dd>
-              </dl>
-              <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="cultureAmount" />
+            <div class="mt-16 mb-4">
+              <vue-slider
+                v-model="needsPercent"
+                tooltip="always"
+                :min="1"
+                :max="100 - savingsPercent"
+              >
+                <template v-slot:tooltip="{ value }">
+                  <div class="p-1 rounded text-sm text-white bg-blue-500">{{ value }}%</div>
+                </template>
+              </vue-slider>
             </div>
-            <div class="flex mb-4 items-center">
-              <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
-                <dt class="font-bold text-gray-700">Extra</dt>
-                <dd class="text-gray-500">Expenses you aren't going to anticipate, like a doctor’s visit, car repair or unplanned presents.</dd>
-              </dl>
-              <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="extraAmount" />
+            <div class="bg-gray-100 pr-1">
+              <h2 class="mb-4 w-full p-2 mr-4 font-bold text-gray-700">Wants ({{ wantsPercent }}%)</h2>
+              <div class="pl-4">
+                <div class="flex mb-4">
+                  <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Regular wants</label>
+                  <span class="text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ total(expenses, {needs: false}) }}</span>
+                </div>
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Culture</dt>
+                    <dd class="text-gray-500">Things like movies, books, museum visits and education.</dd>
+                  </dl>
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="cultureAmount" />
+                </div>
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Unexpected</dt>
+                    <dd class="text-gray-500">Expenses you aren't going to anticipate, like a doctor’s visit, car repair or unplanned presents.</dd>
+                  </dl>
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="extraAmount" />
+                </div>
+                <div class="flex mb-4 items-center">
+                  <dl class="mb-4 w-full p-2 border-b-2 border-dotted mr-4">
+                    <dt class="font-bold text-gray-700">Daily wants</dt>
+                    <dd class="text-gray-500">Purchases you enjoy but don’t need, like a takeout meal or pair of new shoes.</dd>
+                  </dl>
+                  <input class="text-right shadow appearance-none border rounded w-24 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-mono" autocomplete="off" type="tel" placeholder="Amount" v-model="dailyWantsAmount" />
+                </div>
+              </div>
             </div>
-            <div class="flex mb-4 border-t-2 py-2">
+            <div class="flex mb-4 pr-1">
+              <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Savings ({{ savingsPercent }}%)</label>
+              <span class="text-right py-2 px-4 text-red-700 leading-tight font-mono">{{ savingAmount }}</span>
+            </div>
+            <div class="flex mb-4 border-t-2 py-2 pr-1">
               <label class="w-full py-2 text-gray-700 font-bold leading-tight mr-4 text-grey-700" :class="{'text-red-700': balance < 0 }">Balance</label>
               <span class="text-right py-2 px-4 text-gray-700 leading-tight font-mono" :class="{'text-red-700': balance < 0 }">{{ balance }}</span>
             </div>
@@ -392,7 +430,8 @@ export default {
     faq2: false,
     step: 1,
     savingAmount: 0,
-    needsAmount: 0,
+    dailyNeedsAmount: 0,
+    dailyWantsAmount: 0,
     wantsAmount: 0,
     cultureAmount: 0,
     extraAmount: 0,
@@ -625,10 +664,20 @@ export default {
       return this.total(this.incomes) - this.total(this.expenses) - this.savingAmount;
     },
     balance () {
-      return this.availableAmount - this.needsAmount - this.cultureAmount - this.extraAmount - this.wantsAmount;
+      return this.availableAmount - this.dailyNeedsAmount - this.cultureAmount - this.extraAmount - this.dailyWantsAmount;
     },
-    needsPercent () {
-      return this.needsAmount / this.incomeTotal * 100;
+    needsPercent: {
+      get () {
+        const result = (parseInt(this.dailyNeedsAmount) + this.total(this.expenses, {needs: true}) ) / this.incomeTotal * 100;
+
+        return Math.round(result);
+      },
+      set (val) {
+        this.dailyNeedsAmount = Math.round((val / 100) * this.incomeTotal) - this.total(this.expenses, {needs: true});
+      }
+    },
+    wantsPercent () {
+      return 100 - this.savingsPercent - this.needsPercent;
     },
     savingsPercent: {
       get () {
@@ -642,11 +691,11 @@ export default {
   methods: {
     calculate() {
       this.savingAmount = this.incomeTotal * 0.2;
-      this.needsAmount = this.incomeTotal * 0.5 - this.total(this.expenses, {needs: true});
-      const wantsAmount = this.incomeTotal * 0.3 - this.total(this.expenses, {needs: false});
-      this.cultureAmount = wantsAmount * 0.1;
-      this.extraAmount = wantsAmount * 0.1;
-      this.wantsAmount = wantsAmount - parseInt(this.cultureAmount) -  parseInt(this.extraAmount);
+      this.dailyNeedsAmount = this.incomeTotal * 0.5 - this.total(this.expenses, {needs: true});
+      this.wantsAmount = this.incomeTotal * 0.3 - this.total(this.expenses, {needs: false});
+      this.cultureAmount = this.wantsAmount * 0.1;
+      this.extraAmount = this.wantsAmount * 0.1;
+      this.dailyWantsAmount = this.wantsAmount - parseInt(this.cultureAmount) -  parseInt(this.extraAmount);
 
       const goal = this.get('incomes', 'Salary') * 3
       const amount = this.get('amounts', 'Savings');
