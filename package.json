@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Budget Planner",
   "author": "Aleksey Razbakov",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
