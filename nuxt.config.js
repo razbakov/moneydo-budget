@@ -6,6 +6,7 @@ export default {
   */
   head: {
     title: 'MoneyDo: Budget Planner',
+    titleTemplate: '%s - MoneyDo: Budget Planner',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

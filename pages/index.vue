@@ -451,6 +451,8 @@
 <script>
 import VueSlider from 'vue-slider-component'
 import TTip from '~/components/TTip'
+import { isPWA } from "~/lib";
+import * as Firebase from "firebase/app";
 
 export default {
   components: {
@@ -635,9 +637,19 @@ export default {
       }
     ],
   }),
-  metaInfo() {
+  head() {
     return {
-      title: "Budget Edit"
+      title: `Step ${this.step}`,
+      screen: `Step ${this.step}`,
+
+      changed(meta) {
+        Firebase.analytics().setCurrentScreen(meta.screen);
+        Firebase.analytics().logEvent("page_view");
+        Firebase.analytics().logEvent("screen_view", {
+          app_name: isPWA() ? "pwa" : "web",
+          screen_name: meta.screen
+        });
+      }
     };
   },
   mounted() {
@@ -651,8 +663,28 @@ export default {
     expenseTotal() {
       this.calculate();
     },
-    step(step) {
-      this.$fireAnalytics.logEvent(`Step-${step}`);
+    step(val, oldVal) {
+      if (val > oldVal) {
+        if (oldVal === 5 && this.incomeTotal !== 2000) {
+          this.$fireAnalytics.logEvent('change_income');
+        }
+
+        if (oldVal === 6 && this.incomeTotal !== 500) {
+          this.$fireAnalytics.logEvent('change_expense');
+        }
+
+        if (oldVal === 8 && this.savingsPercent !== 20) {
+          this.$fireAnalytics.logEvent('change_savings');
+        }
+
+        if (oldVal === 9 && this.needsPercent !== 50) {
+          this.$fireAnalytics.logEvent('change_needs');
+        }
+
+        this.$fireAnalytics.logEvent('step_next');
+      } else {
+        this.$fireAnalytics.logEvent('step_prev');
+      }
     }
   },
   computed: {
