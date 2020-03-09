@@ -51,10 +51,7 @@
                   Yes
                 </button>
               </div>
-              <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">Tip:</strong>
-                <span class="block sm:inline">Answer yes and skip filling values to see how it works first.</span>
-              </div>
+              <Tip>Answer yes and skip filling values to see how it works first.</Tip>
             </div>
           </div>
           <div v-if="step === 3">
@@ -157,10 +154,7 @@
                   Next
                 </button>
               </div>
-              <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">Tip:</strong>
-                <span class="block sm:inline">Round everything up to whole numbers to make calculations simpler.</span>
-              </div>
+              <Tip>Round everything up to whole numbers to make calculations simpler.</Tip>
             </div>
           </div>
           <div v-if="step === 6">
@@ -184,10 +178,7 @@
                 Next
               </button>
             </div>
-            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</span>
-            </div>
+            <Tip>Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</Tip>
           </div>
           <div v-if="step === 7">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
@@ -215,10 +206,7 @@
                 Next
               </button>
             </div>
-            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">If it is from needs category, but premium and more costly then it comes to wants.</span>
-            </div>
+            <Tip>If it is from needs category, but premium and more costly then it comes to wants.</Tip>
           </div>
           <div v-if="step === 8">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
@@ -272,10 +260,7 @@
                 Next
               </button>
             </div>
-            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">Save 20% of income.</span>
-            </div>
+            <Tip>Save 20% of income.</Tip>
           </div>
           <div v-if="step === 9">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
@@ -368,10 +353,7 @@
                 Finish
               </button>
             </div>
-            <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold">Tip:</strong>
-              <span class="block sm:inline">Plan 50% of income for needs and 30% for wants.</span>
-            </div>
+            <Tip>Plan 50% of income for needs and 30% for wants.</Tip>
           </div>
           <div v-if="step === 10" class="text-gray-700">
             <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
@@ -467,10 +449,12 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
+import Tip from '~/components/Tip'
 
 export default {
   components: {
-    VueSlider
+    VueSlider,
+    Tip
   },
   data: () => ({
     name: "March",
