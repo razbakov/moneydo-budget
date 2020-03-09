@@ -20,12 +20,12 @@
                     <dt @mousedown="faq1 = !faq1" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-3">What is Kakeibo?</dt>
                     <dd v-if="faq1" class="px-2 text-gray-600 mb-3">
                       <p class="mb-4">Kakeibo was invented in 1904 by Japan’s first female journalist, Motoko Hani.</p>
-                      <p>The Japanese tradition of using a kakeibo, which translates to “household finance ledger,” offers an easy solution to mindless spending habits. This budgeting system combines tracking purchases with the habit of mindfulness in order to reign in unnecessary spending and help you achieve savings goals. <a class="underline" href="https://www.credit.com/personal-finance/kakeibo/" target="_blank">Learn more</a>.</p>
+                      <p>The Japanese tradition of using a kakeibo, which translates to “household finance ledger,” offers an easy solution to mindless spending habits. This budgeting system combines tracking purchases with the habit of mindfulness in order to reign in unnecessary spending and help you achieve savings goals. <a class="underline" href="https://www.credit.com/personal-finance/kakeibo/" @click="trackClick('kakeibo')" target="_blank">Learn more</a>.</p>
                     </dd>
                     <dt @mousedown="faq2 = !faq2" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-3">What is 50/30/20?</dt>
                     <dd v-if="faq2" class="px-2 text-gray-600 mb-3">
                       <p class="mb-4">Elizabeth Warren popularized 50/30/20 budget rule in her book "All Your Worth: The Ultimate Lifetime Money Plan".</p>
-                      <p>The 50-30-20 rule puts 50% of your income toward necessities, like housing and bills. Twenty percent should then go toward financial goals, like paying off debt or saving for retirement. Finally, 30% of your income can be allocated to wants, like dining or entertainment. <a class="underline" href="https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922" target="_blank">Learn more</a>.</p>
+                      <p>The 50-30-20 rule puts 50% of your income toward necessities, like housing and bills. Twenty percent should then go toward financial goals, like paying off debt or saving for retirement. Finally, 30% of your income can be allocated to wants, like dining or entertainment. <a class="underline" href="https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922" @click="trackClick('50_30_20')" target="_blank">Learn more</a>.</p>
                     </dd>
                   </dl>
                 </div>
@@ -432,7 +432,7 @@
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
-              <a href="https://pocket-budget.netlify.com/?utm_medium=referral&utm_source=planner&utm_campaign=daily-limits&utm_content=envelopes" target="_blank" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 relative rounded">
+              <a href="https://pocket-budget.netlify.com/?utm_medium=referral&utm_source=planner&utm_campaign=daily-limits&utm_content=envelopes" @click="trackClick('pocket_budget')" target="_blank" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 relative rounded">
                 Start MoneyDo: Pocket Budget
               </a>
             </div>
@@ -443,7 +443,7 @@
     </div>
     <div class="container md:mt-4 border-gray-400 border-t md:border-t-0 mx-auto max-w-screen-sm text-sm text-gray-700 text-center mb-4 p-2">
       Interactions are 100% secure and private. Your answers won't be recorded. See
-      <a href="https://github.com/razbakov/moneydo" target="_blank" class="underline">source code</a>.
+      <a href="https://github.com/razbakov/moneydo" @click="trackClick('github')" target="_blank" class="underline">source code</a>.
     </div>
   </div>
 </template>
@@ -663,8 +663,20 @@ export default {
     expenseTotal() {
       this.calculate();
     },
+    faq1() {
+      this.$fireAnalytics.logEvent('read_kakeibo');
+    },
+    faq2() {
+      this.$fireAnalytics.logEvent('read_50_30_20');
+    },
     step(val, oldVal) {
       if (val > oldVal) {
+        if (oldVal === 2 && val === 3) {
+          this.$fireAnalytics.logEvent('wizard_enabled');
+        } else {
+          this.$fireAnalytics.logEvent('wizard_disabled');
+        }
+
         if (oldVal === 5 && this.incomeTotal !== 2000) {
           this.$fireAnalytics.logEvent('change_income');
         }
@@ -772,10 +784,15 @@ export default {
           amount: "",
           needs: true
         })
+        this.$fireAnalytics.logEvent('line_added');
       }
       if (!item.name && index < items.length - 1) {
         items.splice(index, 1)
+        this.$fireAnalytics.logEvent('line_removed');
       }
+    },
+    trackClick(name) {
+      this.$fireAnalytics.logEvent(`click_${name}`);
     }
   }
 }
