@@ -448,19 +448,23 @@
       Interactions are 100% secure and private. Your answers won't be recorded. See
       <a href="https://github.com/razbakov/moneydo" @click="trackClick('github')" target="_blank" class="underline">source code</a>.
     </div>
+
+    <TTweet v-if="step === 10" class="my-16" />
   </div>
 </template>
 
 <script>
 import VueSlider from 'vue-slider-component'
 import TTip from '~/components/TTip'
+import TTweet from '~/components/TTweet'
 import { isPWA } from "~/lib";
 import * as Firebase from "firebase/app";
 
 export default {
   components: {
     VueSlider,
-    TTip
+    TTip,
+    TTweet
   },
   data: () => ({
     name: "March",
