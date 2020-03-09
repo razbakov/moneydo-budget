@@ -51,7 +51,7 @@
                   Yes
                 </button>
               </div>
-              <Tip>Answer yes and skip filling values to see how it works first.</Tip>
+              <TTip>Answer yes and skip filling values to see how it works first.</TTip>
             </div>
           </div>
           <div v-if="step === 3">
@@ -154,7 +154,7 @@
                   Next
                 </button>
               </div>
-              <Tip>Round everything up to whole numbers to make calculations simpler.</Tip>
+              <TTip>Round everything up to whole numbers to make calculations simpler.</TTip>
             </div>
           </div>
           <div v-if="step === 6">
@@ -178,7 +178,7 @@
                 Next
               </button>
             </div>
-            <Tip>Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</Tip>
+            <TTip>Use previous bills for anything you need to estimate, and don't be afraid to round numbers up - it's better to plan for higher costs than lower.</TTip>
           </div>
           <div v-if="step === 7">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
@@ -206,7 +206,7 @@
                 Next
               </button>
             </div>
-            <Tip>If it is from needs category, but premium and more costly then it comes to wants.</Tip>
+            <TTip>If it is from needs category, but premium and more costly then it comes to wants.</TTip>
           </div>
           <div v-if="step === 8">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
@@ -260,7 +260,7 @@
                 Next
               </button>
             </div>
-            <Tip>Save 20% of income.</Tip>
+            <TTip>Save 20% of income.</TTip>
           </div>
           <div v-if="step === 9">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
@@ -353,7 +353,7 @@
                 Finish
               </button>
             </div>
-            <Tip>Plan 50% of income for needs and 30% for wants.</Tip>
+            <TTip>Plan 50% of income for needs and 30% for wants.</TTip>
           </div>
           <div v-if="step === 10" class="text-gray-700">
             <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
@@ -449,12 +449,12 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
-import Tip from '~/components/Tip'
+import TTip from '~/components/TTip'
 
 export default {
   components: {
     VueSlider,
-    Tip
+    TTip
   },
   data: () => ({
     name: "March",
