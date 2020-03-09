@@ -51,6 +51,10 @@
                   Yes
                 </button>
               </div>
+              <div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Tip:</strong>
+                <span class="block sm:inline">Answer yes and skip filling values to see how it works first.</span>
+              </div>
             </div>
           </div>
           <div v-if="step === 3">
