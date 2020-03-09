@@ -252,7 +252,7 @@
                 Next
               </button>
             </div>
-            <TTip>Save 20% of income.</TTip>
+            <TTip class="mb-4">Save 20% of income.</TTip>
             <div v-if="goals.salary.enabled" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
               <strong class="font-bold block">Goal "Save 3 salaries" - {{ goals.salary.percent }}%</strong>
               <span class="block sm:inline">You saved {{ goals.salary.amount }} of {{ goals.salary.goal }}. With {{ savingAmount }} a month you will reach this goal in {{ monthsToGoal(goals.salary, savingAmount) }} months.</span>
@@ -345,7 +345,7 @@
                 Finish
               </button>
             </div>
-            <TTip>Plan 50% of income for needs and 30% for wants.</TTip>
+            <TTip class="mb-4">Plan 50% of income for needs and 30% for wants.</TTip>
             <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
               <h4 class="font-bold block">Reduce you needs or raise an income</h4>
               <p class="block sm:inline">Ensure your needs are lower than 50% of your income. Right now it's {{ needsPercent }}%.</p>
