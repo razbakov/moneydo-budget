@@ -378,6 +378,9 @@
               <p class="block sm:inline">Try to save 20% of your income. Right now it's {{ savingsPercent }}%.</p>
             </div>
             <div>
+              <button @click="print" class="float-right ml-2 border hover:bg-gray-200 text-gray-500 font-bold py-2 px-4 rounded">
+                Save as PDF
+              </button>
               <h4 class="font-bold block">Step 1. Savings</h4>
               <p class="block sm:inline">Put savings aside.</p>
               <div class="p-4">
@@ -790,6 +793,10 @@ export default {
         items.splice(index, 1)
         this.$fireAnalytics.logEvent('line_removed');
       }
+    },
+    print() {
+      this.$fireAnalytics.logEvent('print');
+      window.print();
     },
     trackClick(name) {
       this.$fireAnalytics.logEvent(`click_${name}`);
