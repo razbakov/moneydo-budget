@@ -213,14 +213,6 @@
               Savings target
             </h2>
             <p class="mb-4 text-gray-500">Decide what you want to save. Drag percent bar or input amount in Savings.</p>
-            <div v-if="savingsPercent < 20" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
-              <h4 class="font-bold block">Long-term goals and savings</h4>
-              <p class="block sm:inline">Try to save 20% of your income. Right now it's {{ savingsPercent }}%.</p>
-            </div>
-            <div v-if="goals.salary.enabled" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-              <strong class="font-bold block">Goal "Save 3 salaries" - {{ goals.salary.percent }}%</strong>
-              <span class="block sm:inline">You saved {{ goals.salary.amount }} of {{ goals.salary.goal }}. With {{ savingAmount }} a month you will reach this goal in {{ monthsToGoal(goals.salary, savingAmount) }} months.</span>
-            </div>
             <div class="flex mb-4">
               <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total income</label>
               <span class="py-2 px-4 text-green-700 leading-tight font-mono">+</span>
@@ -261,20 +253,20 @@
               </button>
             </div>
             <TTip>Save 20% of income.</TTip>
+            <div v-if="goals.salary.enabled" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+              <strong class="font-bold block">Goal "Save 3 salaries" - {{ goals.salary.percent }}%</strong>
+              <span class="block sm:inline">You saved {{ goals.salary.amount }} of {{ goals.salary.goal }}. With {{ savingAmount }} a month you will reach this goal in {{ monthsToGoal(goals.salary, savingAmount) }} months.</span>
+            </div>
+            <div v-if="savingsPercent < 20" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <h4 class="font-bold block">Long-term goals and savings</h4>
+              <p class="block sm:inline">Try to save 20% of your income. Right now it's {{ savingsPercent }}%.</p>
+            </div>
           </div>
           <div v-if="step === 9">
             <h2 class="block text-gray-700 text-xl font-bold mb-2">
               Budget
             </h2>
             <p class="mb-4 text-gray-500">Let's plan your daily spending limits. Drag the slider to set needs percent.</p>
-            <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
-              <h4 class="font-bold block">Reduce you needs or raise an income</h4>
-              <p class="block sm:inline">Ensure your needs are lower than 50% of your income. Right now it's {{ needsPercent }}%.</p>
-            </div>
-            <div v-if="balance != 0" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
-              <h4 class="font-bold block">Adjust your budget</h4>
-              <p class="block sm:inline">Ensure balance is 0. Right now it is {{ balance }}.</p>
-            </div>
             <div class="flex mb-4 pr-1">
               <label class="w-full p-2 border-b-2 border-dotted text-gray-700 leading-tight mr-4">Total income</label>
               <span class="text-right py-2 px-4 text-green-700 leading-tight font-mono">{{ total(incomes) }}</span>
@@ -354,6 +346,14 @@
               </button>
             </div>
             <TTip>Plan 50% of income for needs and 30% for wants.</TTip>
+            <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <h4 class="font-bold block">Reduce you needs or raise an income</h4>
+              <p class="block sm:inline">Ensure your needs are lower than 50% of your income. Right now it's {{ needsPercent }}%.</p>
+            </div>
+            <div v-if="balance != 0" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
+              <h4 class="font-bold block">Adjust your budget</h4>
+              <p class="block sm:inline">Ensure balance is 0. Right now it is {{ balance }}.</p>
+            </div>
           </div>
           <div v-if="step === 10" class="text-gray-700">
             <div v-if="needsPercent > 50" class="mb-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative" role="alert">
