@@ -650,6 +650,9 @@ export default {
     },
     expenseTotal() {
       this.calculate();
+    },
+    step(step) {
+      this.$fireAnalytics.logEvent(`Step-${step}`);
     }
   },
   computed: {

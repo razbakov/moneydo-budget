@@ -38,6 +38,24 @@ export default {
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyDzYyS_4-7ASot7FwJQEL-vU2C5Wk1YvNg",
+          authDomain: "moneydo-budget-planner.firebaseapp.com",
+          databaseURL: "https://moneydo-budget-planner.firebaseio.com",
+          projectId: "moneydo-budget-planner",
+          storageBucket: "moneydo-budget-planner.appspot.com",
+          messagingSenderId: "267808774431",
+          appId: "1:267808774431:web:003e061343fff161a1b82a",
+          measurementId: "G-DZHSNBGX2T"
+        },
+        services: {
+          analytics: true
+        }
+      }
+    ]
   ],
   /*
   ** Nuxt.js modules
