@@ -1,7 +1,7 @@
 {
-  "name": "moneydo",
+  "name": "moneydo-budget-planner",
   "version": "1.0.0",
-  "description": "Budget Planner and Expense Tracker",
+  "description": "Budget Planner",
   "author": "Aleksey Razbakov",
   "private": true,
   "scripts": {
