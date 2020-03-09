@@ -442,7 +442,8 @@
       </div>
     </div>
     <div class="container md:mt-4 border-gray-400 border-t md:border-t-0 mx-auto max-w-screen-sm text-sm text-gray-700 text-center mb-4 p-2">
-      Interactions are 100% secure and private. Your answers won't be recorded or transfered.
+      Interactions are 100% secure and private. Your answers won't be recorded. See
+      <a href="https://github.com/razbakov/moneydo" target="_blank" class="underline">source code</a>.
     </div>
   </div>
 </template>
