@@ -678,10 +678,12 @@ export default {
     },
     step(val, oldVal) {
       if (val > oldVal) {
-        if (oldVal === 2 && val === 3) {
-          this.$fireAnalytics.logEvent('wizard_enabled');
-        } else {
-          this.$fireAnalytics.logEvent('wizard_disabled');
+        if (oldVal === 2) {
+          if (val === 3) {
+            this.$fireAnalytics.logEvent('wizard_enabled');
+          } else {
+            this.$fireAnalytics.logEvent('wizard_disabled');
+          } 
         }
 
         if (oldVal === 5 && this.incomeTotal !== 2000) {
