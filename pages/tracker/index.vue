@@ -6,11 +6,12 @@
       <h2 class="block text-gray-700 text-xl font-bold">
         Create Budget
       </h2>
-      <button
+      <nuxt-link
         class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border rounded"
+        to="/tracker/budget"
       >
         Save
-      </button>
+      </nuxt-link>
     </div>
     <div class="flex items-center mb-4 p-4">
       <label for="budgetName" class="text-gray-600 mr-4 w-1/3">
@@ -110,7 +111,8 @@ export default {
     wants: 0,
     culture: 0,
     extra: 0,
-    name: 'March'
+    name: 'March',
+    saved: false
   })
 }
 </script>
