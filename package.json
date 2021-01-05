@@ -12,15 +12,16 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/firebase": "^4.1.0",
-    "@nuxtjs/pwa": "^3.0.0-0",
     "core-js": "2",
+    "date-and-time": "^0.14.2",
     "firebase": "^7.10.0",
     "nuxt": "^2.0.0",
     "vue-slider-component": "^3.1.1"
   },
   "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/firebase": "^4.1.0",
+    "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/stylelint-module": "^3.1.0",
     "@nuxtjs/tailwindcss": "^1.0.0",
     "@vue/test-utils": "^1.0.0-beta.27",
@@ -28,6 +29,8 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^24.1.0",
+    "node-forge": "^0.7.6",
+    "node-notifier": "^5.4.2",
     "prettier": "^1.19.1",
     "stylelint": "^10.1.0",
     "vue-jest": "^4.0.0-0"

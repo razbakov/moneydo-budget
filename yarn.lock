@@ -4049,6 +4049,11 @@ date-and-time@^0.13.0:
   resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.13.1.tgz#d12ba07ac840d5b112dc4c83f8a03e8a51f78dd6"
   integrity sha512-/Uge9DJAT+s+oAcDxtBhyR8+sKjUnZbYmyhbmWjTHNtX7B7oWD8YyYdeXcBRbwSj6hVvj+IQegJam7m7czhbFw==
 
+date-and-time@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.14.2.tgz#a4266c3dead460f6c231fe9674e585908dac354e"
+  integrity sha512-EFTCh9zRSEpGPmJaexg7HTuzZHh6cnJj1ui7IGCFNXzd2QdpsNh05Db5TF3xzJm30YN+A8/6xHSuRcQqoc3kFA==
+
 de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
