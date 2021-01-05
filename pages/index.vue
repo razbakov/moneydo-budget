@@ -429,14 +429,14 @@
             </div>
             <div class="mb-4">
               <h4 class="font-bold block">Step 3. Save first, spend later.</h4>
-              <p class="block sm:inline">Limit your daily spendings (see above). All you saved today you can spend tomorrow. Track daily limits with <strong class="font-bold">MoneyDo: Pocket Budget</strong>.</p>
+              <p class="block sm:inline">Limit your daily spendings (see above). All you saved today you can spend tomorrow. Track daily limits with <strong class="font-bold">MoneyDo</strong>.</p>
             </div>
             <div class="mt-8 flex justify-between">
               <button @click="step -= 1" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Back
               </button>
-              <a href="https://pocket-budget.netlify.com/?utm_medium=referral&utm_source=planner&utm_campaign=daily-limits&utm_content=envelopes" @click="trackClick('pocket_budget')" target="_blank" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 relative rounded">
-                Start MoneyDo: Pocket Budget
+              <a href="https://moneydo.vip/?utm_medium=referral&utm_source=planner&utm_campaign=daily-limits&utm_content=envelopes" @click="trackClick('pocket_budget')" target="_blank" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 relative rounded">
+                Try MoneyDo
               </a>
             </div>
             <!-- Better spend everything one day before salary than one day after. -->
