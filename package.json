@@ -30,7 +30,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^24.1.0",
     "node-forge": "^0.7.6",
-    "node-notifier": "^5.4.2",
+    "node-notifier": "^8.0.1",
     "prettier": "^1.19.1",
     "stylelint": "^10.1.0",
     "vue-jest": "^4.0.0-0"
